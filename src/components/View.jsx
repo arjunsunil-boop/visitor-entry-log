@@ -1,7 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Nav from './Nav'
 
 const View = () => {
+
+  const [view, ChangeView] = useState(
+    [
+
+      {
+        "name": "John",
+        "age": "30",
+        "date": "01-01-2022"
+      },
+      {
+        "name": "Jane",
+        "age": "25",
+        "date": "02-02-2022"
+      },
+      {
+        "name": "Mike",
+        "age": "35",
+        "date": "03-03-2022"
+      }
+    ]
+
+    
+  )
   return (
     <div>
       <Nav/>
@@ -22,12 +45,27 @@ const View = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  
-                  <td>Mark</td>
-                  <td>23</td>
-                  <td>12-02-2023</td>
-                </tr>
+                {
+
+                  view.map(
+                  (i,index)=>{
+
+                    return(
+
+                      <tr>
+                      <td>{i.name}</td>
+                      <td>{i.age}</td>
+                      <td>{i.date}</td>
+                    </tr>
+                    )
+
+
+                  }
+                  )
+                }
+
+             
+
  
               </tbody>
             </table>
