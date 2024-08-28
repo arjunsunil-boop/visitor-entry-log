@@ -12,17 +12,21 @@ const Add = () => {
       "date": ""
     }
   )
-  const addingOneByone = (theEvent) => {
+  const addingOneByone = (theEvent)=>{
 
-    changeAdd({ ...add, [theEvent.target.name]: theEvent.target.value })
+    changeAdd({...add,[theEvent.target.name]:theEvent.target.value})
 
 
   }
 
   const send = () => {
     console.log(add)
-    axios.post("http://127.0.0.1:5000/add").then(
-      () => {
+    axios.post("http://127.0.0.1:5000/add", add, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(
+      ()=>{
         alert("Success")
       }
     ).catch()
@@ -53,7 +57,7 @@ const Add = () => {
               </div>
               <div className="col col-12 col-sm-6 col md-6 col lg-6 col-xl-6 col-xxl-6">
                 <label htmlFor="" className="form-label">Date</label>
-                <input type="date" className="form-control" onChange={addingOneByone} name='date' value={add.date} />
+                <input type="date" className="form-control" onChange={addingOneByone} name='date' value={add.date}/>
 
               </div>
               <div className="col col-12 col-sm-6 col md-6 col lg-6 col-xl-6 col-xxl-6">
