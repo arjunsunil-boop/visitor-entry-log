@@ -1,8 +1,11 @@
 import React from 'react'
+import Nav from './Nav'
 
 const Add = () => {
   return (
     <div>
+      <Nav/>
+      <br />
 
       <div className="container">
         <div className="row">
