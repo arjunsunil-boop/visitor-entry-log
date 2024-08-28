@@ -1,10 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Nav from './Nav'
+import axios from 'axios'
 
 const Add = () => {
+  const [add, changeAdd] = useState(
+
+    {
+      "name": "",
+      "age": "",
+      "email": "",
+      "date": ""
+    }
+  )
+  const addingOneByone = (theEvent) => {
+
+    changeAdd({ ...add, [theEvent.target.name]: theEvent.target.value })
+
+
+  }
+
+  const send = () => {
+    console.log(add)
+    axios.post("http://127.0.0.1:5000/add").then(
+      () => {
+        alert("Success")
+      }
+    ).catch()
+
+  }
   return (
     <div>
-      <Nav/>
+      <Nav />
       <br />
 
       <div className="container">
@@ -13,25 +39,25 @@ const Add = () => {
             <div className="row g-3">
               <div className="col col-12 col-sm-6 col md-6 col lg-6 col-xl-6 col-xxl-6">
                 <label htmlFor="" className="form-label">Name</label>
-                <input type="text" className="form-control" />
+                <input type="text" className="form-control" onChange={addingOneByone} name='name' value={add.name} />
               </div>
               <div className="col col-12 col-sm-6 col md-6 col lg-6 col-xl-6 col-xxl-6">
-              <label htmlFor="" className="form-label">Age</label>
-              <input type="text" className="form-control" />
+                <label htmlFor="" className="form-label">Age</label>
+                <input type="text" className="form-control" onChange={addingOneByone} name='age' value={add.age} />
 
               </div>
               <div className="col col-12 col-sm-6 col md-6 col lg-6 col-xl-6 col-xxl-6">
-              <label htmlFor="" className="form-label">Email</label>
-              <input type="text" className="form-control" />
+                <label htmlFor="" className="form-label">Email</label>
+                <input type="text" className="form-control" onChange={addingOneByone} name='email' value={add.email} />
 
               </div>
               <div className="col col-12 col-sm-6 col md-6 col lg-6 col-xl-6 col-xxl-6">
-              <label htmlFor="" className="form-label">Date</label>
-              <input type="date" className="form-control" />
+                <label htmlFor="" className="form-label">Date</label>
+                <input type="date" className="form-control" onChange={addingOneByone} name='date' value={add.date} />
 
               </div>
               <div className="col col-12 col-sm-6 col md-6 col lg-6 col-xl-6 col-xxl-6">
-              <button className="btn btn-success">Submit</button>
+                <button className="btn btn-success" onClick={send}>Submit</button>
 
               </div>
             </div>
