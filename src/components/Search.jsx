@@ -38,7 +38,12 @@ const Search = () => {
 
     const searchVisitorGet = () => {
 
-        axios.get("http://127.0.0.1:5000/search", {params : {searchName : search.searchName}}).then(
+        if (search.searchName.trim() =="") {
+            alert("Search Field Empty")
+            return
+        }
+
+        axios.get("http://127.0.0.1:5000/search", {params : {searchName : search.searchName.trim()}}).then(
             (response) => {
                 changeOutput(response.data)
             }
