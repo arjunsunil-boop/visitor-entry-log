@@ -81,14 +81,33 @@ def get_users():
         users.append(user)
     return jsonify(users)
 
-@app.route("/search", methods=["POST"])
-def search_users():
-    __json = request.json
-    searchName = __json['searchName']
+# @app.route("/search", methods=["POST"])
+# def search_users():
+#     __json = request.json
+#     searchName = __json['searchName']
     
+#     cursor = mysql.connection.cursor()
+#     query = "select name, email, age, date from user where name like %s"
+#     cursor.execute(query, (searchName + '%',))
+#     rows = cursor.fetchall()
+#     cursor.close()
+#     users =[]
+#     for i in rows:
+#         user = {
+#             'name' : i[0],
+#             'email': i[1],
+#             'age': i[2],
+#             'date': i[3].strftime('%Y-%m-%d')
+#         }
+#         users.append(user)
+#     return jsonify(users)
+    
+@app.route("/search", methods=["GET"])
+def search_users():
+    parameter = request.args.get('searchName', '')
     cursor = mysql.connection.cursor()
     query = "select name, email, age, date from user where name like %s"
-    cursor.execute(query, (searchName + '%',))
+    cursor.execute(query, (parameter + '%',))
     rows = cursor.fetchall()
     cursor.close()
     users =[]
@@ -100,8 +119,7 @@ def search_users():
             'date': i[3].strftime('%Y-%m-%d')
         }
         users.append(user)
-    return jsonify(users)
-    
+    return jsonify(users)    
        
 if __name__ == "__main__":
     app.run(debug=True)

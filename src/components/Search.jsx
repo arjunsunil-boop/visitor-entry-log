@@ -21,14 +21,25 @@ const Search = () => {
         changeSearch({ ...search, [event.target.name]: event.target.value })
     }
 
-    const searchVisitor = () => {
-        axios.post("http://127.0.0.1:5000/search", search, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(
+    // const searchVisitor = () => {
+    //     axios.post("http://127.0.0.1:5000/search", search, {
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     }).then(
+    //         (response) => {
+    //             console.log(response.data)
+    //             changeOutput(response.data)
+    //         }
+    //     ).catch()
+    // }
+
+    //using axios get:
+
+    const searchVisitorGet = () => {
+
+        axios.get("http://127.0.0.1:5000/search", {params : {searchName : search.searchName}}).then(
             (response) => {
-                console.log(response.data)
                 changeOutput(response.data)
             }
         ).catch()
@@ -53,7 +64,7 @@ const Search = () => {
 
                             </div>
                             <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
-                                <button className="btn btn-success" onClick={searchVisitor}>Search</button>
+                                <button className="btn btn-success" onClick={searchVisitorGet}>Search</button>
                             </div>
                         </div>
                         <div className="row g-3">
