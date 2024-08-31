@@ -29,8 +29,10 @@ const Add = () => {
       ()=>{
         alert("Success")
       }
-    ).catch()
-
+    ).catch((error) => {
+      console.error(error);
+      alert("Error occurred");
+    });
   }
   return (
     <div>
